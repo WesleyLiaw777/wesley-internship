@@ -3,6 +3,7 @@ import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../css/styles/keen-slider.css";
+import "../../css/styles/skeleton.css"
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
