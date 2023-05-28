@@ -4,7 +4,7 @@ import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../css/styles/keen-slider.css";
-import "../../css/styles/skeleton.css"
+import "../../css/styles/skeleton.css";
 
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 
@@ -137,8 +137,12 @@ const NewItems = () => {
                           <div className="skeleton skeleton__profile--image"></div>
                         </div>
                         <div className="nft_coll_info new-items__info--skeleton">
-                          <h4 className="skeleton name-skeleton"></h4>
-                          <span className="skeleton id-skeleton"></span>
+                          <div className="new-items__name-and-id--skeleton">
+                            <h4 className="skeleton  new-items__name--skeleton"></h4>
+                            <span className="skeleton id-skeleton"></span>
+                          </div>
+
+                          <div className="skeleton new-items__likes--skeleton"></div>
                         </div>
                       </div>
                     </div>
