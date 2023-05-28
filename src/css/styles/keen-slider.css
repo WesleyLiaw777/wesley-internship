@@ -105,5 +105,25 @@
   margin-top: 8px;
 }
 
-.keen-slider__slide {
+/* NEW ITEMS */
+
+.new-items__container--skeleton{
+  height: 340px;
+}
+
+.new-items__skeleton-bg{
+  width: 100%;
+  height: 240px;
+}
+
+.new-items__info--skeleton{
+  align-items: start;
+  margin-left: 16px;
+  margin-top: 20px;
+}
+
+.new-items__profile--skeleton{
+  position: absolute;
+  top: 48px;
+  left: 12px;
 }
