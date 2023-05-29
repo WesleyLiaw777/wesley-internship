@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/styles/skeleton.css";
 
-export default function NftCard({ nftArray, setNFTArray, currentNFT, loading }) {
+export default function NftCard({ nftArray, setNFTArray, currentNFT, loading, defaultImage, defaultId }) {
   const [countdownTimer, setCountdownTimer] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,10 +49,10 @@ export default function NftCard({ nftArray, setNFTArray, currentNFT, loading }) 
   }
 
   return currentNFT && !loading && countdownTimer ? (
-    <div className="explore-nft__item">
+    <div className="general-nft__item">
       <div className="author_list_pp">
-        <Link to={`/author/${currentNFT.authorId}`}>
-          <img className="lazy" src={currentNFT.authorImage} alt="" />
+        <Link to={`/author/${defaultId || currentNFT.authorId}`}>
+          <img className="lazy" src={defaultImage || currentNFT.authorImage} alt="" />
           <i className="fa fa-check"></i>
         </Link>
       </div>
@@ -64,12 +64,12 @@ export default function NftCard({ nftArray, setNFTArray, currentNFT, loading }) 
         <Link to={`/item-details/${currentNFT.nftId}`}>
           <img
             src={currentNFT.nftImage}
-            className="lazy explore-nft__item_preview"
+            className="lazy general-nft__item_preview"
             alt=""
           />
         </Link>
       </div>
-      <div className="explore-nft__item_info">
+      <div className="general-nft__item_info">
         <Link to={`/item-details/${currentNFT.nftId}`}>
           <h4>{currentNFT.title}</h4>
         </Link>
@@ -81,7 +81,7 @@ export default function NftCard({ nftArray, setNFTArray, currentNFT, loading }) 
       </div>
     </div>
   ) : (
-    <div className="nft_coll explore__container--skeleton">
+    <div className="nft_coll general__container--skeleton">
       <div className="skeleton new-items__skeleton-bg"></div>
       <div className="nft_coll_pp new-items__profile--skeleton">
       </div>

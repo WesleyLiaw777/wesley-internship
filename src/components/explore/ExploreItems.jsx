@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "../../css/styles/explore.css";
+import "../../css/styles/nftCard.css";
 import { BASE_URL } from "../../constants";
 import NftCard from "../UI/nftCard";
 
