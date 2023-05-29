@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../css/styles/skeleton.css";
+import { BASE_URL } from "../../constants";
 
 const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
 
   async function getTopSellers() {
     const { data } = await axios.get(
-      "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
+      `${BASE_URL + `topSellers`}`
     );
+    
     setTopSellers(data);
   }
 

@@ -1,77 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
+import "../../css/styles/explore.css";
+import { BASE_URL } from "../../constants";
+import ExploreNFT from "../UI/ExploreNFT";
 
+const FILTER_URL = BASE_URL + `explore?filter=`
+let sliceIndex = 8;
 const ExploreItems = () => {
+  const [collection, setCollection] = useState([]);
+  const [slicedColl, setSlicedColl] = useState([]);
+  const [loading, setLoading] = useState(false)
+  async function getCollection() {
+    const { data } = await axios.get(
+      `${BASE_URL + `explore`}`
+    );
+    setCollection(data);
+    setSlicedColl(data.slice(0, sliceIndex));
+  }
+  useEffect(() => {
+    getCollection();
+  }, []);
+
+  const numNFTS = collection.length;
+  const [showMore, setShowMore] = useState(true);
+
+  const loadMore = () => {
+    sliceIndex += 4; //shows another four
+    setSlicedColl(collection.slice(0, sliceIndex));
+    if (sliceIndex >= numNFTS) {
+      setShowMore(false);
+      return;
+    }
+  };
+
+  async function fetchFiltered(event) {
+    setLoading(true);
+    const query = event.target.value; //for others devs' readability
+    const {data} = await axios.get(`${FILTER_URL + query} `)
+    setCollection(data);
+    setSlicedColl(data.slice(0, sliceIndex));
+    setLoading(false);
+  }
+
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select id="filter-items" defaultValue="" onChange={(event) => fetchFiltered(event)}>
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
-          <option value="likes_high_to_low">Most liked</option>
+          <option value="likes_high_to_low">Most Liked</option>
         </select>
       </div>
-      {new Array(8).fill(0).map((_, index) => (
-        <div
-          key={index}
-          className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
-          style={{ display: "block", backgroundSize: "cover" }}
-        >
-          <div className="nft__item">
-            <div className="author_list_pp">
-              <Link
-                to="/author"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-              >
-                <img className="lazy" src={AuthorImage} alt="" />
-                <i className="fa fa-check"></i>
-              </Link>
-            </div>
-            <div className="de_countdown">5h 30m 32s</div>
 
-            <div className="nft__item_wrap">
-              <div className="nft__item_extra">
-                <div className="nft__item_buttons">
-                  <button>Buy Now</button>
-                  <div className="nft__item_share">
-                    <h4>Share</h4>
-                    <a href="" target="_blank" rel="noreferrer">
-                      <i className="fa fa-facebook fa-lg"></i>
-                    </a>
-                    <a href="" target="_blank" rel="noreferrer">
-                      <i className="fa fa-twitter fa-lg"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-envelope fa-lg"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <Link to="/item-details">
-                <img src={nftImage} className="lazy nft__item_preview" alt="" />
-              </Link>
-            </div>
-            <div className="nft__item_info">
-              <Link to="/item-details">
-                <h4>Pinky Ocean</h4>
-              </Link>
-              <div className="nft__item_price">1.74 ETH</div>
-              <div className="nft__item_like">
-                <i className="fa fa-heart"></i>
-                <span>69</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+      <section id="nft-container">
+        {slicedColl.map((nft, id) => (
+          <ExploreNFT
+            key={id}
+            nftArray={slicedColl}
+            setNFTArray={setSlicedColl}
+            currentNFT={nft}
+            loading={loading}
+          />
+        ))}
+      </section>
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
-          Load more
-        </Link>
+        {(showMore && collection.length) && (
+          <Link
+            to=""
+            id="loadmore"
+            className="btn-main lead"
+            onClick={() => loadMore()}
+          >
+            Load more
+          </Link>
+        )}
       </div>
     </>
   );
