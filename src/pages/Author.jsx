@@ -50,6 +50,7 @@ const Author = () => {
         <div id="top"></div>
         {loading ? (
           <>
+            <div className="skeleton author__bg--skeleton"></div>
             <section className="author__user--skeleton-container">
               <div className="author__all-info--skeleton-container">
                 <div className="skeleton author__profile--skeleton"></div>
