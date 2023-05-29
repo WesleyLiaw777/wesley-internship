@@ -6,13 +6,14 @@ import "../../css/styles/keen-slider.css";
 import "../../css/styles/skeleton.css"
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../constants";
 
 const HotCollections = () => {
   const [collections, setCollections] = useState([]);
 
   async function fetchCollections() {
     const { data } = await axios.get(
-      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections"
+      `${BASE_URL + `hotCollections`}`
     );
     setCollections(data);
   }
