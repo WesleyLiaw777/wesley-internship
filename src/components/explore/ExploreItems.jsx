@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "../../css/styles/explore.css";
 import { BASE_URL } from "../../constants";
-import ExploreNFT from "../UI/ExploreNFT";
+import NftCard from "../UI/nftCard";
 
 const FILTER_URL = BASE_URL + `explore?filter=`
 let sliceIndex = 8;
@@ -56,7 +56,7 @@ const ExploreItems = () => {
 
       <section id="nft-container">
         {slicedColl.map((nft, id) => (
-          <ExploreNFT
+          <NftCard
             key={id}
             nftArray={slicedColl}
             setNFTArray={setSlicedColl}

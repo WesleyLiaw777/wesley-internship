@@ -2,11 +2,12 @@
 Accepts prop that lets it know whether to a return a skeleton card or a real card (in which case it will be populated).
 Countdown code will be here for the sake of ease of access. It's not used anywhere else.
 */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/styles/skeleton.css";
 
-export default function ExploreNFT({ nftArray, setNFTArray, currentNFT, loading }) {
+export default function NftCard({ nftArray, setNFTArray, currentNFT, loading }) {
+  const [countdownTimer, setCountdownTimer] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setNFTArray((prevItems) => {
@@ -19,9 +20,21 @@ export default function ExploreNFT({ nftArray, setNFTArray, currentNFT, loading 
     return () => clearInterval(interval);
   }, [nftArray]);
 
+  useEffect(() => {
+    if (currentNFT && currentNFT.timeRemaining ) {
+      setCountdownTimer(true);
+    }
+  }, [currentNFT]);
+  
+  useEffect(() => {
+    if (loading) {
+      setCountdownTimer(false)
+    }
+  }, [loading])
+
   function timeLeft(expiryDate) {
     if (!expiryDate) {
-      return;
+      return `NO EXPIRY`;
     }
     let millis = expiryDate - Date.now();
     if (millis <= 0) {
@@ -35,7 +48,7 @@ export default function ExploreNFT({ nftArray, setNFTArray, currentNFT, loading 
     return `${hoursText}h ${minutesText}m ${secondsText}s`;
   }
 
-  return currentNFT && !loading ? (
+  return currentNFT && !loading && countdownTimer ? (
     <div className="explore-nft__item">
       <div className="author_list_pp">
         <Link to={`/author/${currentNFT.authorId}`}>
