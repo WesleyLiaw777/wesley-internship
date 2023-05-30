@@ -8,10 +8,8 @@ const TopSellers = () => {
   const [topSellers, setTopSellers] = useState([]);
 
   async function getTopSellers() {
-    const { data } = await axios.get(
-      `${BASE_URL + `topSellers`}`
-    );
-    
+    const { data } = await axios.get(`${BASE_URL + `topSellers`}`);
+
     setTopSellers(data);
   }
 
@@ -25,11 +23,23 @@ const TopSellers = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Top Sellers</h2>
+              <h2
+                data-aos="fade-in"
+                data-aos-duration="1200"
+                data-aos-delay="200"
+                data-aos-offset="200"
+                data-aos-once="true"
+              >
+                Top Sellers
+              </h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-12">
+          <div data-aos="fade-in"
+            data-aos-duration="1200"
+            data-aos-delay="400"
+            data-aos-offset="200"
+            data-aos-once="true" className="col-md-12">
             <ol className="author_list">
               {topSellers.length
                 ? topSellers.map((seller, id) => (
@@ -45,7 +55,9 @@ const TopSellers = () => {
                         </Link>
                       </div>
                       <div className="author_list_info">
-                        <Link to={`/author/${seller.authorId}`}>{seller.authorName}</Link>
+                        <Link to={`/author/${seller.authorId}`}>
+                          {seller.authorName}
+                        </Link>
                         <span>{seller.price} ETH</span>
                       </div>
                     </li>

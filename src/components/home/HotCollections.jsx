@@ -3,7 +3,7 @@ import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../css/styles/keen-slider.css";
-import "../../css/styles/skeleton.css"
+import "../../css/styles/skeleton.css";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { BASE_URL } from "../../constants";
@@ -12,9 +12,7 @@ const HotCollections = () => {
   const [collections, setCollections] = useState([]);
 
   async function fetchCollections() {
-    const { data } = await axios.get(
-      `${BASE_URL + `hotCollections`}`
-    );
+    const { data } = await axios.get(`${BASE_URL + `hotCollections`}`);
     setCollections(data);
   }
 
@@ -56,11 +54,26 @@ const HotCollections = () => {
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>Hot Collections</h2>
+              <h2
+                data-aos="fade-in"
+                data-aos-duration="1200"
+                data-aos-delay="200"
+                data-aos-offset="200"
+                data-aos-once="true"
+              >
+                Hot Collections
+              </h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="navigation-wrapper">
+          <div
+            data-aos="fade-in"
+            data-aos-duration="1200"
+            data-aos-delay="400"
+            data-aos-offset="200"
+            data-aos-once="true"
+            className="navigation-wrapper"
+          >
             <div ref={sliderRef} className="keen-slider">
               {collections.length
                 ? collections.map((nft, index) => (
