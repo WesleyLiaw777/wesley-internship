@@ -47,7 +47,7 @@ export default function NFT({ nftArray, setNFTArray, currentNFT }) {
         <div className="de_countdown">{currentNFT.timeRemaining}</div>
       )}
 
-      <div className="nft__item_wrap" style={{overflow: 'hidden'}}>
+      <div className="nft__item_wrap" style={{ overflow: "hidden" }}>
         <Link to={`/item-details/${currentNFT.nftId}`}>
           <img
             src={currentNFT.nftImage}
@@ -56,7 +56,7 @@ export default function NFT({ nftArray, setNFTArray, currentNFT }) {
           />
         </Link>
       </div>
-      <div className="nft__item_info" style={{marginTop: '12px'}}>
+      <div className="nft__item_info" style={{ marginTop: "12px" }}>
         <Link to={`/item-details/${currentNFT.nftId}`}>
           <h4>{currentNFT.title}</h4>
         </Link>

@@ -3,7 +3,7 @@ import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../css/styles/keen-slider.css";
-import {BASE_URL} from "../../constants"
+import { BASE_URL } from "../../constants";
 
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import NFT from "../UI/NFT";
@@ -11,9 +11,7 @@ import NFT from "../UI/NFT";
 const NewItems = () => {
   const [newItems, setNewItems] = useState([]);
   async function fetchNewItems() {
-    const { data } = await axios.get(
-      `${BASE_URL + `newItems`}`
-    );
+    const { data } = await axios.get(`${BASE_URL + `newItems`}`);
     setNewItems(data);
   }
 
@@ -76,16 +74,34 @@ const NewItems = () => {
   }
 
   return (
-    <section id="section-items" className="no-bottom">
+    <section
+      id="section-items"
+      className="no-bottom"
+    >
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
             <div className="text-center">
-              <h2>New Items</h2>
+              <h2
+                data-aos="fade-in"
+                data-aos-duration="1200"
+                data-aos-delay="200"
+                data-aos-offset="200"
+                data-aos-once="true"
+              >
+                New Items
+              </h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="navigation-wrapper">
+          <div
+            data-aos="fade-in"
+            data-aos-duration="1200"
+            data-aos-delay="400"
+            data-aos-offset="200"
+            data-aos-once="true"
+            className="navigation-wrapper"
+          >
             <div ref={sliderRef} className="keen-slider">
               {newItems.length
                 ? newItems.map((nft, id) => (
