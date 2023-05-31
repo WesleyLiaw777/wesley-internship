@@ -66,15 +66,14 @@ const ExploreItems = () => {
         ))}
       </section>
       <div className="col-md-12 text-center">
-        {(showMore && collection.length) && (
-          <Link
-            to=""
+        {showMore && collection.length > 0 && (
+          <button
             id="loadmore"
             className="btn-main lead"
             onClick={() => loadMore()}
           >
             Load more
-          </Link>
+          </button>
         )}
       </div>
     </>
