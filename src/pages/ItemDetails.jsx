@@ -6,21 +6,25 @@ import { BASE_URL } from "../constants";
 
 const NFT_URL = BASE_URL + `itemDetails?nftId=`;
 const ItemDetails = () => {
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const { id } = useParams();
   const [nft, setNft] = useState([]);
+  const [loading, setLoading] = useState(false);
   async function getNft() {
+    setLoading(true);
     const { data } = await axios.get(`${NFT_URL + id}`);
     setNft(data);
+    setLoading(false);
   }
   useEffect(() => {
     getNft();
   }, []);
 
-  return nft ? (
+  return !loading ? (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
         <div id="top"></div>
